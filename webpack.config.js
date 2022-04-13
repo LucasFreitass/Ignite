@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const isDevelopment = process.env.NODE_ENV !== 'production'; // Se ela for diferente de production, quer dizer q estou em ambiente de desenvolvimento
 // agora eu vou fazer um if no mode " se eu estou em desenvolvimento eu vou usar o modo 'development' se não 'production' 
@@ -19,15 +20,17 @@ module.exports = {   // EXPORTANDO UM OBJETO DE CONFIGURAÇÕES
 
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'public')
-        }
+            directory: path.resolve(__dirname, 'public'),
+        },
+        hot: true,
     },
 
     plugins: [
+         isDevelopment && new ReactRefreshWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html')
         })
-    ],
+    ].filter(Boolean),
     module: { // aqui fica as definições de oq fazer com cada tipo de arquivo recebido, como nossa 
                 //aplicação vai se comportar, por ex: se eu importar aquivo .js quero lidar de uma forma, se for .png de outra.
         rules: [ // array de regras
@@ -37,7 +40,14 @@ module.exports = {   // EXPORTANDO UM OBJETO DE CONFIGURAÇÕES
                             // para testar, eu tenho q ver o final do arquivo, pra ver se é .jsx para isso:
                                 // Sempre q quero dizer q deve terminar usar o $ antes do cifrão eu digo oq quero testar
                 exclude: /node_modules/,
-                use: 'babel-loader',
+                use: {
+                   loader: 'babel-loader',
+                   options: {
+                    plugins:  [
+                        isDevelopment && require.resolve('react-refresh/babel')
+                    ].filter(Boolean)
+                   },
+                },
             },
             {
                 test: /\.scss$/,
