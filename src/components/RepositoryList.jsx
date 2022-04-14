@@ -1,5 +1,7 @@
 import { RepositoryItem } from "./RepositoryItem";
 
+import '../styles/repositories.scss';
+
 const repository = {  //* Objeto para salvar todas as informações do repositorio e passar isso em vez de um texto nas propriedades do componente 
     name: 'unform',
     description: 'Forms in React',
