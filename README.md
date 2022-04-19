@@ -1,7 +1,8 @@
 <h1 align="center"> Github-Explorer </h1>
 
+<h2 align="center">Aplicação básica desenvolvida no primeiro módulo do curso Ignite da Rocketseat</h2>
 
-## Aplicação básica desenvolvida no primeiro módulo do curso Ignite da Rocketseat
+
 
 A aplicação tem como objetivo listar repositórios do GitHub da Rocketseat e renderizar em tela a listagem, apresentando o nome de cada repositório, descrição e a url. Para isso foi utilizada a API do Github para pegar esses dados e passar para a aplicação. 
 
