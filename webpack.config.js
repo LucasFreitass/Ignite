@@ -9,13 +9,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production'; // Se ela for difer
 module.exports = {   // EXPORTANDO UM OBJETO DE CONFIGURAÇÕES 
     mode: isDevelopment ? 'development' : 'production',
     devtool: isDevelopment ? 'eval-source-map' : 'soucer-map',
-    entry: path.resolve(__dirname, 'src', 'index.jsx'),  // fala qual é o arquivo principal, inicial da nossa aplicação
+    entry: path.resolve(__dirname, 'src', 'index.tsx'),  // fala qual é o arquivo principal, inicial da nossa aplicação
     output: {
         path: path.resolve(__dirname, 'dist'),  // fala a pasta de destino
         filename: 'bundle.js' // arquivo de destino, dps de fazer conversão
     },
     resolve: { // é uma nova instrução que recebe um array com várias extensões de arquivos, pois por padrão ele le arquivo js, mas usamos jsx
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
 
     devServer: {
@@ -35,7 +35,7 @@ module.exports = {   // EXPORTANDO UM OBJETO DE CONFIGURAÇÕES
                 //aplicação vai se comportar, por ex: se eu importar aquivo .js quero lidar de uma forma, se for .png de outra.
         rules: [ // array de regras
             { // objeto para cada tipo de arquivo
-                test: /\.jsx$/, 
+                test: /\.(j|t)sx$/, 
                         // test recebe uma expressão regular que diz se é um arquivo jsx ou não. 
                             // para testar, eu tenho q ver o final do arquivo, pra ver se é .jsx para isso:
                                 // Sempre q quero dizer q deve terminar usar o $ antes do cifrão eu digo oq quero testar
